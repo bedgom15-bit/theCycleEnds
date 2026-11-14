@@ -1,0 +1,40 @@
+{
+  "name": "cycle-ends-here",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "assets": "node scripts/make-assets.mjs",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "android:assets": "node scripts/make-android-assets.mjs",
+    "android:sync": "npm run build && cap sync android",
+    "android:open": "cap open android",
+    "android:apk": "npm run android:sync && node scripts/build-apk.mjs assembleDebug",
+    "android:release": "npm run android:sync && node scripts/build-apk.mjs assembleRelease",
+    "ota:bundle": "npm run build && node scripts/make-ota.mjs"
+  },
+  "dependencies": {
+    "@capacitor/android": "^7.6.10",
+    "@capacitor/core": "^7.6.10",
+    "@capacitor/local-notifications": "^7.0.7",
+    "@capacitor/status-bar": "^7.0.6",
+    "@capgo/capacitor-updater": "^7.51.23",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.6.10",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.7.0",
+    "fflate": "^0.8.2",
+    "sharp": "^0.35.5",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.6",
+    "vite-plugin-pwa": "^1.3.0",
+    "vitest": "^3.2.7"
+  }
+}
