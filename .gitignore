@@ -1,0 +1,8 @@
+node_modules
+dist
+dev-dist
+.env.local
+*.jks
+*.keystore
+keystore.properties
+_subir_a_github/
