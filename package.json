@@ -1,7 +1,7 @@
 {
   "name": "cycle-ends-here",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -19,7 +19,9 @@
   "dependencies": {
     "@capacitor/android": "^7.6.10",
     "@capacitor/core": "^7.6.10",
+    "@capacitor/filesystem": "^7.1.9",
     "@capacitor/local-notifications": "^7.0.7",
+    "@capacitor/share": "^7.0.4",
     "@capacitor/status-bar": "^7.0.6",
     "@capgo/capacitor-updater": "^7.51.23",
     "react": "^18.3.1",

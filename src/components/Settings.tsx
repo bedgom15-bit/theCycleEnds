@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
-import { exportJson, parseImport, type AppData, type Habit } from '../lib/storage';
+import { parseImport, type AppData, type Habit } from '../lib/storage';
+import { exportBackup } from '../lib/backup';
 import { APP_VERSION } from '../lib/version';
 
 interface Props {
@@ -14,14 +15,11 @@ export function Settings({ data, habit, onRename, onDelete, onImport }: Props) {
   const fileRef = useRef<HTMLInputElement>(null);
   const [note, setNote] = useState('');
 
-  const doExport = () => {
-    const blob = new Blob([exportJson(data)], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `cycle-ends-here-${new Date().toISOString().slice(0, 10)}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
+  const doExport = async () => {
+    const result = await exportBackup(data);
+    if (result === 'error') setNote('No se pudo exportar el respaldo.');
+    else if (result === 'downloaded') setNote('Respaldo descargado.');
+    else setNote('');
   };
 
   const doImport = async (file: File) => {
@@ -67,7 +65,7 @@ export function Settings({ data, habit, onRename, onDelete, onImport }: Props) {
         <input
           ref={fileRef}
           type="file"
-          accept="application/json"
+          accept="application/json,.json"
           hidden
           onChange={(e) => {
             const f = e.target.files?.[0];
